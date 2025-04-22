@@ -95,6 +95,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8410945713558678616, guid: 9d16e2c0107cdc1479ed1c62da869020, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3124742892468602329, guid: 9d16e2c0107cdc1479ed1c62da869020, type: 3}
       propertyPath: m_Name
       value: ClientProjectile

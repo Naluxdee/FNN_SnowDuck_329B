@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8208218858426068674}
   - component: {fileID: 7658555175637805222}
   - component: {fileID: 4202261795301414048}
-  - component: {fileID: -4463819319298853721}
+  - component: {fileID: 4006956046878093102}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.46, y: 0.62, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1699, y: 0.1699, z: 0.1699}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,10 +76,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 528719067
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -5547194825390550217, guid: 70bcf1825087d024bbbcdffe8cc5f16c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 2141003123
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 2141003123
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-4463819319298853721
+--- !u!114 &4006956046878093102
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,10 +160,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7121764429665681886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 226904464329e594ca0305fb15b546d1, type: 3}
+  m_Script: {fileID: 11500000, guid: d9b70d5115c0df0498be91a7196721bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  enemyPrefab: {fileID: 7121764429665681886}
-  enemyCount: 1
-  spawnRadius: 5
+  attackRange: 1.5
+  attackRate: 1
+  attackDamage: 1

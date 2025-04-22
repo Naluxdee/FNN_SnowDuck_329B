@@ -22,4 +22,5 @@ public class EnemySpawner : NetworkBehaviour
         enemy.GetComponent<NetworkObject>().Spawn(); // ซิงค์ไปยังทุก Client
         Debug.Log("[SERVER] Enemy Spawned!");
     }
+
 }
