@@ -1,24 +1,49 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using Unity.Netcode;
+using System.Collections;
 
 public class OnlineEnemySpawnPoint : NetworkBehaviour
 {
-    public GameObject enemyPrefab; // ãÊè Prefab ·ÕèÁÕ NetworkObject
-    public Transform[] spawnPoints; // ¨Ø´à¡Ô´¢Í§ Enemy
+    public GameObject enemyPrefab;
+    public Transform[] spawnPoints;
 
-    public float spawnInterval = 5f;
-    private float timer;
+    public float timeBetweenWaves = 10f;
+    public float timeBetweenSpawns = 1f;
+    public int enemiesPerWaveStart = 3;
+    public int enemiesIncrementPerWave = 2;
+    public int maxWaves = 5; // ðŸŒŸ à¸ˆà¸³à¸™à¸§à¸™ Wave à¸ªà¸¹à¸‡à¸ªà¸¸à¸”
 
-    void Update()
+    private int currentWave = 0;
+    private bool waveStarted = false;
+
+    [ServerRpc(RequireOwnership = false)]
+    public void StartWaveServerRpc()
     {
-        if (!IsServer) return; // ãËé Server à·èÒ¹Ñé¹à»ç¹¤¹ Spawn
-
-        timer += Time.deltaTime;
-        if (timer >= spawnInterval)
+        if (!waveStarted)
         {
-            SpawnEnemy();
-            timer = 0f;
+            waveStarted = true;
+            StartCoroutine(SpawnWaves());
         }
+    }
+
+    IEnumerator SpawnWaves()
+    {
+        while (currentWave < maxWaves)
+        {
+            currentWave++;
+            int enemiesToSpawn = enemiesPerWaveStart + enemiesIncrementPerWave * (currentWave - 1);
+            Debug.Log($"[Server] Starting Wave {currentWave}/{maxWaves}, Spawning {enemiesToSpawn} enemies");
+
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
+                SpawnEnemy();
+                yield return new WaitForSeconds(timeBetweenSpawns);
+            }
+
+            yield return new WaitForSeconds(timeBetweenWaves);
+        }
+
+        Debug.Log("[Server] All waves completed!");
     }
 
     void SpawnEnemy()
