@@ -1,63 +1,12 @@
-using Unity.Netcode;
+Ôªøusing Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Networking;
-// À“°„™È UNet
+using UnityEngine.Networking; // ‡∏´‡∏≤‡∏Å‡πÉ‡∏ä‡πâ UNet (‡πÅ‡∏ï‡πà‡πÑ‡∏°‡πà‡∏à‡∏≥‡πÄ‡∏õ‡πá‡∏ô‡∏™‡∏≥‡∏´‡∏£‡∏±‡∏ö Netcode for GameObjects)
 
 public class EnemyController : NetworkBehaviour
 {
-    /*public int enemyHP = 10;
-    public float moveSpeed = 2f;
-    private Rigidbody2D rb;
-    private Transform targetPlayer;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-
-        // À“ Tower ∑’Ë Spawn ¡“
-        if (IsServer)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Tower");
-            if (player != null)
-            {
-                targetPlayer = player.transform;
-            }
-        }
-    }
-
-
-    void FixedUpdate()
-    {
-        if (!IsServer || targetPlayer == null) return;
-
-        Vector2 direction = (targetPlayer.position - transform.position).normalized;
-        rb.velocity = direction * moveSpeed;
-
-        if (direction != Vector2.zero)
-        {
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            rb.rotation = angle - 90f; // -90 ‡æ◊ËÕ„ÀÈ sprite À—π¢÷Èπ‡ªÁπ·π«‡√‘Ë¡µÈπ
-        }
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("PlayerBullet"))
-        {
-            Debug.Log("Enemy hit by Player Bullet!");
-            enemyHP--;
-
-            // ∂È“æ≈—ß™’«‘µÀ¡¥ „ÀÈ∑”≈“¬ Enemy
-            if (enemyHP <= 0)
-            {
-                NetworkBehaviour.Destroy(gameObject);
-            }
-            
-        }
-        
-    }*/
     public int enemyHP = 10;
     public float moveSpeed = 2f;
+
     private Rigidbody2D rb;
     private Transform targetPlayer;
 
@@ -98,6 +47,7 @@ public class EnemyController : NetworkBehaviour
     {
         if (!IsServer) return;
 
+        // ‚ö†Ô∏è ‡πÇ‡∏î‡∏ô‡∏Å‡∏£‡∏∞‡∏™‡∏∏‡∏ô
         if (collision.CompareTag("PlayerBullet"))
         {
             enemyHP--;
@@ -107,6 +57,19 @@ public class EnemyController : NetworkBehaviour
             {
                 GetComponent<NetworkObject>().Despawn();
             }
+        }
+
+        // ‚ö†Ô∏è ‡∏ä‡∏ô Tower
+        if (collision.CompareTag("Tower"))
+        {
+            TowerHealth tower = collision.GetComponent<TowerHealth>();
+            if (tower != null)
+            {
+                tower.TakeDamage(1); // ‡∏•‡∏î HP Tower ‡∏•‡∏á 1
+                Debug.Log("Enemy hit Tower! Tower HP reduced.");
+            }
+
+            GetComponent<NetworkObject>().Despawn(); // ‡∏ó‡∏≥‡∏•‡∏≤‡∏¢ Enemy ‡∏´‡∏•‡∏±‡∏á‡∏ä‡∏ô
         }
     }
 }

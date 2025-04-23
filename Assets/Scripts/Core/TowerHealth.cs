@@ -1,25 +1,27 @@
 using Unity.Netcode;
 using UnityEngine;
-// หากใช้ UNet
-using UnityEngine.Networking;
 
 public class TowerHealth : NetworkBehaviour
 {
-    public int maxHealth = 100;
-    //[SyncVar] // สำหรับ UNet/Mirror: ซิงค์ค่าพลังชีวิต
-    public int currentHealth;
+    public int maxHealth = 3;
+    private NetworkVariable<int> currentHealth = new NetworkVariable<int>();
 
-    void Start()
+    public override void OnNetworkSpawn()
     {
-        currentHealth = maxHealth;
+        if (IsServer)
+        {
+            currentHealth.Value = maxHealth;
+        }
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        Debug.Log("Tower took " + damage + " damage. Current health: " + currentHealth);
+        if (!IsServer) return;
 
-        if (currentHealth <= 0)
+        currentHealth.Value -= damage;
+        Debug.Log($"Tower took {damage} damage. Current health: {currentHealth.Value}");
+
+        if (currentHealth.Value <= 0)
         {
             Die();
         }
@@ -28,13 +30,19 @@ public class TowerHealth : NetworkBehaviour
     void Die()
     {
         Debug.Log("Tower destroyed!");
-        // ในเกมออนไลน์ คุณอาจจะต้องแจ้งให้ผู้เล่นทราบว่า Tower ถูกทำลายแล้ว
-        // และอาจมี Logic อื่นๆ ที่เกี่ยวข้องกับการแพ้ชนะ
-        // หากใช้ UNet: NetworkServer.Destroy(gameObject);
-        Destroy(gameObject); // สำหรับการทดสอบ Offline
+        GameManagerUI.Instance.ShowLoseTextClientRpc(); // เรียกโชว์ข้อความ
+        GetComponent<NetworkObject>().Despawn(); // ลบ Tower จาก Network
     }
+
+
+    // สำหรับตรวจสอบว่ามีอะไรชน Tower
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("it hit!!!");
+        Debug.Log($"Tower collided with: {collision.name}");
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth.Value;
     }
 }
