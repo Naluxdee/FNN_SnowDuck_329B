@@ -1359,6 +1359,22 @@ PrefabInstance:
       propertyPath: enemyHP
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4202261795301414048, guid: 6ca3651729c552347adc122f6b69b002, type: 3}
+      propertyPath: SyncPositionZ
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202261795301414048, guid: 6ca3651729c552347adc122f6b69b002, type: 3}
+      propertyPath: SyncRotAngleX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202261795301414048, guid: 6ca3651729c552347adc122f6b69b002, type: 3}
+      propertyPath: SyncRotAngleY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202261795301414048, guid: 6ca3651729c552347adc122f6b69b002, type: 3}
+      propertyPath: SyncRotAngleZ
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7121764429665681886, guid: 6ca3651729c552347adc122f6b69b002, type: 3}
       propertyPath: m_Name
       value: enemy
