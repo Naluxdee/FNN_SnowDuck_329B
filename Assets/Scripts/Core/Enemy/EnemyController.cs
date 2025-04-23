@@ -1,11 +1,11 @@
 using Unity.Netcode;
 using UnityEngine;
-// หากใช้ UNet
 using UnityEngine.Networking;
+// หากใช้ UNet
 
 public class EnemyController : NetworkBehaviour
 {
-    public int enemyHP = 10;
+    /*public int enemyHP = 10;
     public float moveSpeed = 2f;
     private Rigidbody2D rb;
     private Transform targetPlayer;
@@ -14,7 +14,7 @@ public class EnemyController : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        // หา Player คนแรกที่ Spawn มา
+        // หา Tower ที่ Spawn มา
         if (IsServer)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Tower");
@@ -55,5 +55,58 @@ public class EnemyController : NetworkBehaviour
             
         }
         
+    }*/
+    public int enemyHP = 10;
+    public float moveSpeed = 2f;
+    private Rigidbody2D rb;
+    private Transform targetPlayer;
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        if (IsServer)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Tower");
+            if (player != null)
+            {
+                targetPlayer = player.transform;
+            }
+        }
+    }
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void FixedUpdate()
+    {
+        if (!IsServer || targetPlayer == null) return;
+
+        Vector2 direction = (targetPlayer.position - transform.position).normalized;
+        rb.velocity = direction * moveSpeed;
+
+        if (direction != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            rb.rotation = angle - 90f;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!IsServer) return;
+
+        if (collision.CompareTag("PlayerBullet"))
+        {
+            enemyHP--;
+            Debug.Log("Enemy hit!");
+
+            if (enemyHP <= 0)
+            {
+                GetComponent<NetworkObject>().Despawn();
+            }
+        }
     }
 }
