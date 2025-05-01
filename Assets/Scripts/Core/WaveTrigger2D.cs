@@ -11,11 +11,12 @@ public class WaveTrigger2D : NetworkBehaviour
     {
         if (!IsServer || triggered) return;
 
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Tower"))//รอแก้เป็น Tower หากมันเดินได้แล้ว
         {
             triggered = true;
             Debug.Log("[Server] Triggered wave start!");
             spawner.StartWaveServerRpc();
+            Destroy(gameObject);
         }
     }
 }

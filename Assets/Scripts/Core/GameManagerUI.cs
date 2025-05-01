@@ -19,4 +19,14 @@ public class GameManagerUI : NetworkBehaviour
     {
         loseTextUI.SetActive(true);
     }
+
+    public void LeaveGame()
+    {
+        if (NetworkManager.Singleton.IsHost)
+        {
+            HostSingleton.Instance.GameManager.Shutdown();
+        }
+
+        ClientSingleton.Instance.GameManager.Disconnect();
+    }
 }

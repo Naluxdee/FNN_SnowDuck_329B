@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -47,14 +47,14 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        // µ√«® Õ∫«Ë“ºŸÈ‡≈Ëπ¡’°“√°¥ªÿË¡‡§≈◊ËÕπ∑’ËÀ√◊Õ‰¡Ë
+        // ‡∏ï‡∏£‡∏ß‡∏à‡∏™‡∏≠‡∏ö‡∏ß‡πà‡∏≤‡∏ú‡∏π‡πâ‡πÄ‡∏•‡πà‡∏ô‡∏°‡∏µ‡∏Å‡∏≤‡∏£‡∏Å‡∏î‡∏õ‡∏∏‡πà‡∏°‡πÄ‡∏Ñ‡∏•‡∏∑‡πà‡∏≠‡∏ô‡∏ó‡∏µ‡πà‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà
         if (movementInput != Vector2.zero)
         {
-            // §”π«≥¡ÿ¡°“√À¡ÿπ‰ªµ“¡∑‘»∑“ß∑’Ë°¥ WASD
+            // ‡∏Ñ‡∏≥‡∏ô‡∏ß‡∏ì‡∏°‡∏∏‡∏°‡∏Å‡∏≤‡∏£‡∏´‡∏°‡∏∏‡∏ô‡πÑ‡∏õ‡∏ï‡∏≤‡∏°‡∏ó‡∏¥‡∏®‡∏ó‡∏≤‡∏á‡∏ó‡∏µ‡πà‡∏Å‡∏î WASD
             float targetAngle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
 
-            // ∑”„ÀÈ°“√À¡ÿπ≈◊Ëπ¢÷Èπ
+            // ‡∏ó‡∏≥‡πÉ‡∏´‡πâ‡∏Å‡∏≤‡∏£‡∏´‡∏°‡∏∏‡∏ô‡∏•‡∏∑‡πà‡∏ô‡∏Ç‡∏∂‡πâ‡∏ô
             bodyTransform.rotation = Quaternion.Slerp(bodyTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
@@ -73,12 +73,13 @@ public class PlayerMovement : NetworkBehaviour
 
         if (!IsOwner) return;
 
-        // ‡§≈◊ËÕπ∑’Ë‰ª¢È“ßÀπÈ“ µ“¡∑’Ëµ—«≈–§√°”≈—ßÀ—πÀπÈ“
-        rb.velocity = bodyTransform.up * movementInput.magnitude * movementSpeed;
+        Vector2 moveDelta = movementInput.normalized * movementSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + moveDelta);
     }
+
 
     private void HandleMove(Vector2 input)
     {
-        movementInput = input; // ∫—π∑÷°§Ë“°“√‡§≈◊ËÕπ∑’Ë¢ÕßºŸÈ‡≈Ëπ
+        movementInput = input; // ‡∏ö‡∏±‡∏ô‡∏ó‡∏∂‡∏Å‡∏Ñ‡πà‡∏≤‡∏Å‡∏≤‡∏£‡πÄ‡∏Ñ‡∏•‡∏∑‡πà‡∏≠‡∏ô‡∏ó‡∏µ‡πà‡∏Ç‡∏≠‡∏á‡∏ú‡∏π‡πâ‡πÄ‡∏•‡πà‡∏ô
     }
 }
