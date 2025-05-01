@@ -158,7 +158,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   enemyHP: 2
-  moveSpeed: 2
+  moveSpeed: 3
+  targetCheckRange: 15
 --- !u!61 &9111966082010654341
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -18,13 +18,7 @@ public class TowerPathFollower : MonoBehaviour
             StartCoroutine(MoveAlongWaypoints());
         }
     }
-/*    void LateUpdate()
-    {
-        Vector3 pos = transform.position;
-        pos.z = 0f;
-        transform.position = pos;
-    }
-*/
+
     IEnumerator MoveAlongWaypoints()
     {
         while (currentWaypoint < waypoints.Length)

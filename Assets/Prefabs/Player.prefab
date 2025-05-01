@@ -5531,7 +5531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   CurrentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 100
   <MaxHealth>k__BackingField: 100
 --- !u!61 &8179395788284785205
 BoxCollider2D:

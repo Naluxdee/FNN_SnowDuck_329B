@@ -168,6 +168,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   enemyHP: 1
   moveSpeed: 3
+  targetCheckRange: 15
 --- !u!50 &7804224122863596759
 Rigidbody2D:
   serializedVersion: 5

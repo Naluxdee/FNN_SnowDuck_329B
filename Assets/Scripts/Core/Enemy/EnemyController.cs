@@ -1,26 +1,20 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Networking; // หากใช้ UNet (แต่ไม่จำเป็นสำหรับ Netcode for GameObjects)
 
 public class EnemyController : NetworkBehaviour
 {
     public int enemyHP = 10;
     public float moveSpeed = 2f;
+    public float targetCheckRange = 3f;
 
     private Rigidbody2D rb;
-    private Transform targetPlayer;
+    private Transform currentTarget;
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
-
         if (IsServer)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Tower");
-            if (player != null)
-            {
-                targetPlayer = player.transform;
-            }
+            FindTarget();
         }
     }
 
@@ -31,9 +25,13 @@ public class EnemyController : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if (!IsServer || targetPlayer == null) return;
+        if (!IsServer) return;
 
-        Vector2 direction = (targetPlayer.position - transform.position).normalized;
+        FindTarget();
+
+        if (currentTarget == null) return;
+
+        Vector2 direction = (currentTarget.position - transform.position).normalized;
         rb.velocity = direction * moveSpeed;
 
         if (direction != Vector2.zero)
@@ -43,33 +41,62 @@ public class EnemyController : NetworkBehaviour
         }
     }
 
+    private void FindTarget()
+    {
+        GameObject tower = GameObject.FindGameObjectWithTag("Tower");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        float towerDist = tower != null ? Vector2.Distance(transform.position, tower.transform.position) : float.MaxValue;
+        float playerDist = player != null ? Vector2.Distance(transform.position, player.transform.position) : float.MaxValue;
+
+        if (player != null && playerDist <= targetCheckRange && playerDist < towerDist)
+        {
+            currentTarget = player.transform;
+        }
+        else if (tower != null)
+        {
+            currentTarget = tower.transform;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsServer) return;
 
-        // ⚠️ โดนกระสุน
+        // ถูกยิง
         if (collision.CompareTag("PlayerBullet"))
         {
             enemyHP--;
-            Debug.Log("Enemy hit!");
-
             if (enemyHP <= 0)
             {
                 GetComponent<NetworkObject>().Despawn();
             }
+            return;
         }
 
-        // ⚠️ ชน Tower
-        if (collision.CompareTag("Tower"))
+        // โจมตี Player
+        if (collision.CompareTag("Player"))
         {
-            TowerHealth tower = collision.GetComponent<TowerHealth>();
-            if (tower != null)
+            Health playerHealth = collision.GetComponent<Health>();
+            if (playerHealth != null)
             {
-                tower.TakeDamage(1); // ลด HP Tower ลง 1
-                Debug.Log("Enemy hit Tower! Tower HP reduced.");
+                playerHealth.TakeDamage(100);
             }
 
-            GetComponent<NetworkObject>().Despawn(); // ทำลาย Enemy หลังชน
+            GetComponent<NetworkObject>().Despawn();
+            return;
+        }
+
+        // โจมตี Tower
+        if (collision.CompareTag("Tower"))
+        {
+            TowerHealth towerHealth = collision.GetComponent<TowerHealth>();
+            if (towerHealth != null)
+            {
+                towerHealth.TakeDamage(1);
+            }
+
+            GetComponent<NetworkObject>().Despawn();
         }
     }
 }

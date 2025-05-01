@@ -11,9 +11,9 @@ public class Health : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if(!IsServer) {return;}
+        if (!IsServer) return;
 
-        CurrentHealth.Value = MaxHealth;
+        CurrentHealth.Value = 100; // เริ่มต้นด้วย HP = 100
     }
 
     public void TakeDamage(int damageValue)
@@ -28,7 +28,7 @@ public class Health : NetworkBehaviour
 
     private void ModifyHealth(int value)
     {
-        if(isDead) {return;}
+        if (isDead) return;
 
         int newHealth = CurrentHealth.Value + value;
         CurrentHealth.Value = Mathf.Clamp(newHealth, 0, MaxHealth);
