@@ -20,4 +20,9 @@ public class MainMenu : MonoBehaviour
     {
         await ClientSingleton.Instance.GameManager.StartClientAsync(joinCodeField.text);
     }
+    public void QuitGame()
+    {
+        
+        Application.Quit();
+    }
 }
