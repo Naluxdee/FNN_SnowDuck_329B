@@ -5477,7 +5477,7 @@ MonoBehaviour:
   bodyTransform: {fileID: 6681245506653942700}
   rb: {fileID: 5937068078339538037}
   dustCloud: {fileID: 8765427860437298183}
-  movementSpeed: 4
+  movementSpeed: 6
   rotationSpeed: 10
   particleEmissionValue: 10
 --- !u!114 &1240812873470018675
@@ -5515,7 +5515,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1445888058436339461}
   playerCollider: {fileID: 2998703308425333051}
   projectileSpeed: 30
-  fireRate: 0.75
+  fireRate: 1.25
   muzzleFlashDuration: 0.075
 --- !u!114 &4248369743101186687
 MonoBehaviour:
@@ -5567,7 +5567,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.044781238, y: -0.029854298}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5577,7 +5577,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.9254794, y: 1.8956251}
   m_EdgeRadius: 0
 --- !u!114 &4855772759314647428
 MonoBehaviour:
@@ -5653,7 +5653,7 @@ MonoBehaviour:
   - {r: 0.24313726, g: 0.6666667, b: 0.93333334, a: 1}
   - {r: 0.9137255, g: 0.47843137, b: 0.47843137, a: 1}
   - {r: 0.6156863, g: 0.6, b: 1, a: 1}
-  - {r: 0.972549, g: 1, b: 0, a: 1}
+  - {r: 0.9333334, g: 0.9607844, b: 0, a: 1}
   - {r: 0.6431373, g: 1, b: 0.5411765, a: 1}
   colorIndex: 0
 --- !u!212 &2218214174893659300
@@ -6148,7 +6148,7 @@ Transform:
   m_GameObject: {fileID: 7483812483310188831}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 4.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -44,20 +44,40 @@ public class EnemyController : NetworkBehaviour
     private void FindTarget()
     {
         GameObject tower = GameObject.FindGameObjectWithTag("Tower");
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        float towerDist = tower != null ? Vector2.Distance(transform.position, tower.transform.position) : float.MaxValue;
-        float playerDist = player != null ? Vector2.Distance(transform.position, player.transform.position) : float.MaxValue;
+        float minDist = float.MaxValue;
+        Transform closestTarget = null;
 
-        if (player != null && playerDist <= targetCheckRange && playerDist < towerDist)
+        // เช็ค Player ทุกตัว
+        foreach (GameObject player in players)
         {
-            currentTarget = player.transform;
+            float dist = Vector2.Distance(transform.position, player.transform.position);
+            if (dist <= targetCheckRange && dist < minDist)
+            {
+                minDist = dist;
+                closestTarget = player.transform;
+            }
         }
-        else if (tower != null)
+
+        // ถ้าเจอ Player ที่ใกล้กว่า Tower
+        if (closestTarget != null && tower != null)
+        {
+            float towerDist = Vector2.Distance(transform.position, tower.transform.position);
+            if (minDist < towerDist)
+            {
+                currentTarget = closestTarget;
+                return;
+            }
+        }
+
+        // ไม่เจอ Player หรือ Tower ใกล้กว่า
+        if (tower != null)
         {
             currentTarget = tower.transform;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -80,7 +100,7 @@ public class EnemyController : NetworkBehaviour
             Health playerHealth = collision.GetComponent<Health>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(100);
+                playerHealth.TakeDamage(20);
             }
 
             GetComponent<NetworkObject>().Despawn();

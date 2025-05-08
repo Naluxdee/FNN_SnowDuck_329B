@@ -13,7 +13,7 @@ public class Health : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        CurrentHealth.Value = 100; // เริ่มต้นด้วย HP = 100
+        CurrentHealth.Value = 100; 
     }
 
     public void TakeDamage(int damageValue)

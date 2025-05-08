@@ -237,7 +237,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -536,7 +536,7 @@ TextureImporter:
         height: 129
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 70, y: 0, z: 70, w: 0}
+      border: {x: 40, y: 29, z: 34, w: 17}
       customData: 
       outline: []
       physicsShape: []
@@ -558,7 +558,7 @@ TextureImporter:
         height: 129
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 28, y: 39, z: 28, w: 29}
+      border: {x: 26, y: 29, z: 28, w: 27}
       customData: 
       outline: []
       physicsShape: []
@@ -580,7 +580,7 @@ TextureImporter:
         height: 129
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 30, y: 41, z: 29, w: 29}
+      border: {x: 24, y: 29, z: 27, w: 19}
       customData: 
       outline: []
       physicsShape: []
@@ -712,7 +712,7 @@ TextureImporter:
         height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 34, y: 40, z: 36, w: 32}
+      border: {x: 28, y: 34, z: 26, w: 24}
       customData: 
       outline: []
       physicsShape: []
@@ -734,7 +734,7 @@ TextureImporter:
         height: 139
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 50, z: 0, w: 50}
+      border: {x: 26, y: 32, z: 23, w: 26}
       customData: 
       outline: []
       physicsShape: []
@@ -932,7 +932,7 @@ TextureImporter:
         height: 926
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 74, y: 79, z: 70, w: 64}
+      border: {x: 40, y: 45, z: 35, w: 30}
       customData: 
       outline: []
       physicsShape: []
@@ -954,7 +954,7 @@ TextureImporter:
         height: 798
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 70, y: 70, z: 70, w: 70}
+      border: {x: 40, y: 51, z: 39, w: 35}
       customData: 
       outline: []
       physicsShape: []
@@ -1328,7 +1328,7 @@ TextureImporter:
         height: 270
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 80, y: 80, z: 80, w: 80}
+      border: {x: 37, y: 38, z: 32, w: 32}
       customData: 
       outline: []
       physicsShape: []
@@ -1350,7 +1350,7 @@ TextureImporter:
         height: 270
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 80, y: 80, z: 80, w: 80}
+      border: {x: 38, y: 42, z: 30, w: 32}
       customData: 
       outline: []
       physicsShape: []

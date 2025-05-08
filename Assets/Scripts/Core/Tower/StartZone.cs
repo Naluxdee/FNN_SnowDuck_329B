@@ -1,11 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using TMPro;
 
 public class StartZone : MonoBehaviour
 {
-    public TowerPathFollower TowerPathFollower; // ��ҧ�ԧ��ѧ Tower
-    public TextMeshProUGUI countdownText;       // UI Text �ʴ��Ѻ�����ѧ
+    public TowerPathFollower TowerPathFollower; // อ้างอิงไปยัง Tower
+    public TextMeshProUGUI countdownText;       // UI Text แสดงนับถอยหลัง
 
     private bool hasTriggered = false;
 

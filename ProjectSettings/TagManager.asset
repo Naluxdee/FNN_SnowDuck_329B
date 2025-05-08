@@ -11,7 +11,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
   - Projectile
@@ -43,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 4196786391
+    locked: 0
+  - name: road
+    uniqueID: 3341714417
     locked: 0
   - name: Default
     uniqueID: 0
