@@ -11,7 +11,7 @@ public class OnlineEnemySpawnPoint : NetworkBehaviour
     public float timeBetweenSpawns = 1f;
     public int enemiesPerWaveStart = 3;
     public int enemiesIncrementPerWave = 2;
-    public int maxWaves = 5; // 🌟 จำนวน Wave สูงสุด
+    public int maxWaves = 5; // จำนวน Wave สูงสุด
 
     private int currentWave = 0;
     private bool waveStarted = false;

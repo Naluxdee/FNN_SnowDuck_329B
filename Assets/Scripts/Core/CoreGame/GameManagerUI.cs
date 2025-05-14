@@ -11,7 +11,7 @@ public class GameManagerUI : NetworkBehaviour
     private void Awake()
     {
         Instance = this;
-        loseTextUI.SetActive(false); // ปิดไว้ก่อน
+        loseTextUI.SetActive(false);
     }
 
     [ClientRpc]

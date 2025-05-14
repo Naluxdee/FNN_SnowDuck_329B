@@ -4,8 +4,8 @@ using TMPro;
 
 public class StartZone : MonoBehaviour
 {
-    public TowerPathFollower TowerPathFollower; // อ้างอิงไปยัง Tower
-    public TextMeshProUGUI countdownText;       // UI Text แสดงนับถอยหลัง
+    public TowerPathFollower TowerPathFollower; 
+    public TextMeshProUGUI countdownText;       
 
     private bool hasTriggered = false;
 
